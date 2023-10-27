@@ -109,7 +109,9 @@ def main(page: ft.Page):
                 selected_icon=ft.icons.VIDEO_LIBRARY_ROUNDED,
                 label="Video",
             ),
-        ]
+
+        ],
+        on_change=settings_click,
     )
 
     page.add(body)
