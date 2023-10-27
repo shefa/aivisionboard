@@ -1,7 +1,7 @@
 {
     "name": "aivisionboard",
     "short_name": "aivisionboard",
-    "description": "AI VisionBoard app",
+    "description": "AI VisionBoard App",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#ffffff",
