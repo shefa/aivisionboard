@@ -111,7 +111,7 @@ def main(page: ft.Page):
             ),
 
         ],
-        on_change=settings_click,
+        on_change=menu_click,
     )
 
     page.add(body)
