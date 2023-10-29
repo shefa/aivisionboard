@@ -46,8 +46,8 @@ def main(page: ft.Page):
                 "negative_prompt": NEGATIVE_PROMPT1,
                 "height":int(height), "width":int(width),
                 "num_inference_steps": 100,
-                "preview_steps": 5,
-                "preview_size": min(height,width)
+                "preview_steps": 10,
+                "preview_size": max(height,width)
                 }
         )
 
