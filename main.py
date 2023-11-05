@@ -58,7 +58,8 @@ def main(page: ft.Page):
             body.image_src = image
             body.image_opacity=0.7
             print(dream_prompt.value, image)
-            page.update()
+
+        page.update()
 
         feedback_button_dislike.opacity=1
         feedback_button_like.opacity=1
@@ -70,6 +71,13 @@ def main(page: ft.Page):
         page.update()
 
     def settings_click(e):
+        height = page.height or page.window_height
+        width = page.width or page.window_width
+        print(height,width)
+        page.update()
+
+    def download_click(e):
+        page.launch_url(body.image_src)
         height = page.height or page.window_height
         width = page.width or page.window_width
         print(height,width)
@@ -99,11 +107,13 @@ def main(page: ft.Page):
                     )
 
     prompt_element = ft.Row([dream_prompt],alignment=ft.MainAxisAlignment.CENTER)
+    download_button = ft.IconButton(ft.icons.FILE_DOWNLOAD_ROUNDED, on_click=download_click)
 
     top_buttons = ft.Row(
             [
                 ft.IconButton(ft.icons.MENU_OUTLINED, on_click=navigation_bar_toggle),
-                ft.IconButton(ft.icons.SETTINGS_OUTLINED, on_click=settings_click),
+                download_button
+                #ft.IconButton(ft.icons.SETTINGS_OUTLINED, on_click=settings_click),
             ],
             alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
         )
