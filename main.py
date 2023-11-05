@@ -77,7 +77,7 @@ def main(page: ft.Page):
         page.update()
 
     def download_click(e):
-        page.launch_url(body.image_src)
+        page.launch_url(body.image_src, web_popup_window=True)
         height = page.height or page.window_height
         width = page.width or page.window_width
         print(height,width)
