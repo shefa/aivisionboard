@@ -4,18 +4,26 @@ from bisect import bisect
 from time import sleep
 
 NEGATIVE_PROMPT1="BadDream, badhandv4, BadNegAnatomyV1-neg, easynegative, FastNegativeV2, bad anatomy, extra people, (deformed iris, deformed pupils, mutated hands and fingers:1.4), (deformed, distorted, disfigured:1.3), poorly drawn, bad anatomy, wrong anatomy, extra limb, missing limb, floating limbs, disconnected limbs, mutation, mutated, ugly, disgusting, amputation, signature, watermark, airbrush, photoshop, plastic doll, (ugly eyes, deformed iris, deformed pupils, fused lips and teeth:1.2), text, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, long neck, masculine, obese, fat, out of frame, caricature, body horror, mutant, facebook, youtube, food, lowres, text, error, cropped, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated, out of frame, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, long neck, username, watermark, signature"
-NEGATIVE_PROMPT2="ugly, duplicate, morbid, mutilated, out of frame, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, blurry, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, long neck, low resolution, 3d model, deformed hands, deformed feet, deformed face, deformed body parts, same haircut, eyes without pupils, doubled image, mid aged man, old men, logo in frame, gun, man with more than one penis on body, scared facial expression, drawing, painting, blur focus, blur, photo effects, skinny guy, make-up on male, angry facial expression, same human face in one frame, illustration, anime, cartoon, ugly face, bruises, cartoon, anime, painting, red color saturation, unattractive face, jpeg artifacts, frame, Violence, Gore, Blood, War, Weapons, Death, Destruction, Fire, Explosions, Pollution, Garbage, Graffiti, Vandalism, Rust, Decay, Filth, Disease, Insects, Rodents, Vermin, Darkness, Shadows, Nightmares, Fear, Horror, Sadness, Depression, Pain, Suffering, Anguish, Despair, Loneliness, Isolation, Neglect, Abandonment, Negativity, Hate, Racism, Sexism, Homophobia, Discrimination, Intolerance, Prejudice, Ignorance, Arrogance, Greed, Selfishness, Cruelty, Insanity, Madness, lowres, text, error, cropped, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated, out of frame, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, long neck, deformed, ugly, mutilated, disfigured, text, extra limbs, face cut, head cut, extra fingers, extra arms, poorly drawn face, mutation, bad proportions, cropped head, malformed limbs, mutated hands, fused fingers, long neck, illustration, painting, drawing, art, sketch, disfigured, kitsch, ugly, oversaturated, grain, low-res, Deformed, blurry, bad anatomy, disfigured, poorly drawn face, mutation, mutated, extra limb, ugly, poorly drawn hands, missing limb, blurry, floating limbs, disconnected limbs, malformed hands, blur, out of focus, long neck, long body, ugly, disgusting, poorly drawn, childish, mutilated, , mangled, old, surreal"
+NEGATIVE_PROMPT2="worst quality, low quality, low resolution, lowres, text, error, cropped, out of frame, logo in frame, illustration, ugly, duplicate, morbid, mutilated, anime, cartoon, jpeg artifacts, frame, doubled image, sketch, kitsch, oversaturated, low-res, out of focus, disgusting, poorly drawn, childish, mangled, old, surreal, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, blurry, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, long neck, long body, deformed hands, deformed feet, deformed face, deformed body parts, scared facial expression, drawing, painting, photo effects, angry facial expression, ugly face, bruises, unattractive face, Violence, Gore, Blood, War, Weapons, Death, Destruction, Fire, Pollution, Garbage, Vandalism, Rust, Decay, Filth, Disease, Insects, Rodents, Darkness, Shadows, Nightmares, Fear, Horror, Sadness, Depression, Pain, Suffering, Anguish, Despair, Loneliness, Isolation, Neglect, Abandonment, Negativity, Hate, Racism, Sexism, Homophobia, Discrimination, Intolerance, Prejudice, Ignorance, Arrogance, Greed, Selfishness, Cruelty, Insanity, Madness"
 
 additional_prompts = [
-    ", ultra realistic in detail, vibrant, cinematic, dreamy, crisp, sharp",
+    ", ultra realistic, detailed, cinematic, dreamy, sharp, vibrant",
+    ", ultra realistic, detailed, cinematic, dreamy, sharp, vibrant",
     ", in the style of TOK, ultra realistic in detail, vibrant, cinematic, dreamy, crisp, sharp",
-    ", ultra realistic in detail, vibrant, cinematic, dreamy, crisp, sharp",
+    
+]
+
+inference_steps = [
+    60,
+    6,
+    60,
 ]
 
 models = [
     "lucataco/ssd-1b:1ee85ef681d5ad3d6870b9da1a4543cb3ad702d036fa5b5210f133b83b05a780",
+    "lucataco/sdxl-lcm:fbbd475b1084de80c47c35bfe4ae64b964294aa7e237e6537eed938cfd24903d",
     "jbilcke/sdxl-cinematic-2:47437c1ade41930aa63e002adbcb946a1dc8649d741de113f02a48639228c8e4",
-    "anotherjesse/streaming-sdxl:153204130f521e631a916ef067a0c5e09dcb8782bcfd90926b8e73763b161959",
+    #"anotherjesse/streaming-sdxl:153204130f521e631a916ef067a0c5e09dcb8782bcfd90926b8e73763b161959",
     #"jbilcke/sdxl-majestic:99a36a3726ce3ede05b8514fc1aaa73be494804f5ea29596c5a37229dfd3c2f6",
     #"luosiallen/latent-consistency-model:553803fd018b3cf875a8bc774c99da9b33f36647badfd88a6eec90d61c5f62fc",
     #"lucataco/hotshot-xl:78b3a6257e16e4b241245d65c8b2b81ea2e1ff7ed4c55306b511509ddbfd327a",
@@ -43,11 +51,9 @@ def main(page: ft.Page):
             models[selected_model],
             input={
                 "prompt": dream_prompt.value+additional_prompts[selected_model],
-                "negative_prompt": NEGATIVE_PROMPT1,
+                "negative_prompt": NEGATIVE_PROMPT2,
                 "height":int(height), "width":int(width),
-                "num_inference_steps": 100,
-                "preview_steps": 10,
-                "preview_size": max(height,width)
+                "num_inference_steps": inference_steps[selected_model],
                 }
         )
 
@@ -176,7 +182,7 @@ def main(page: ft.Page):
         destinations=[
             ft.NavigationDestination(icon=ft.icons.IMAGE_OUTLINED, label="Current"),
             ft.NavigationDestination(icon=ft.icons.IMAGE_ROUNDED, label="Test"),
-            ft.NavigationDestination(icon=ft.icons.VIDEO_LIBRARY_OUTLINED, label="Video"),
+            ft.NavigationDestination(icon=ft.icons.VIDEO_LIBRARY_OUTLINED, label="Cinematic"),
         ],
         on_change=navigation_bar_toggle,
     )
