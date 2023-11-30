@@ -21,7 +21,8 @@ inference_steps = [
 
 models = [
     "lucataco/ssd-1b:1ee85ef681d5ad3d6870b9da1a4543cb3ad702d036fa5b5210f133b83b05a780",
-    "lucataco/sdxl-lcm:fbbd475b1084de80c47c35bfe4ae64b964294aa7e237e6537eed938cfd24903d",
+    "fofr/sdxl-turbo:6244ebc4d96ffcc48fa1270d22a1f014addf79c41732fe205fb1ff638c409267",
+    #"lucataco/sdxl-lcm:fbbd475b1084de80c47c35bfe4ae64b964294aa7e237e6537eed938cfd24903d",
     "jbilcke/sdxl-cinematic-2:47437c1ade41930aa63e002adbcb946a1dc8649d741de113f02a48639228c8e4",
     #"anotherjesse/streaming-sdxl:153204130f521e631a916ef067a0c5e09dcb8782bcfd90926b8e73763b161959",
     #"jbilcke/sdxl-majestic:99a36a3726ce3ede05b8514fc1aaa73be494804f5ea29596c5a37229dfd3c2f6",
@@ -54,6 +55,7 @@ def main(page: ft.Page):
                 "negative_prompt": NEGATIVE_PROMPT2,
                 "height":int(height), "width":int(width),
                 "num_inference_steps": inference_steps[selected_model],
+                "agree_to_research_only": True,
                 }
         )
 
