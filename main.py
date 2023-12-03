@@ -49,7 +49,7 @@ def main(page: ft.Page):
     def refiner_lcm(image_url, prompt):
         refiner_model = "fofr/latent-consistency-model:a83d4056c205f4f62ae2d19f73b04881db59ce8b81154d314dd34ab7babaa0f1"
         height, width = size_estimation(page.height or page.window_height, page.width or page.window_width)
-        return replicate.run(
+        iterator = replicate.run(
             refiner_model,
             input={
                 "image": image_url,
@@ -61,6 +61,14 @@ def main(page: ft.Page):
                 "disable_safety_checker": True,
             }
         )
+
+        if isinstance(iterator, str):
+            iterator = [iterator]
+
+        result = ""
+        for image in iterator:
+            result = image
+        return result
 
     def prompt(e):
         print(dream_prompt.value)
