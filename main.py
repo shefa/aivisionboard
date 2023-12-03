@@ -22,7 +22,8 @@ inference_steps = [
 
 models = [
     "lucataco/ssd-1b:1ee85ef681d5ad3d6870b9da1a4543cb3ad702d036fa5b5210f133b83b05a780",
-    "dhanushreddy291/sdxl-turbo:53a8078c87ad900402a246bf5e724fa7538cf15c76b0a22753594af58850a0e3",
+    "fofr/sdxl-turbo:6244ebc4d96ffcc48fa1270d22a1f014addf79c41732fe205fb1ff638c409267",
+    #"dhanushreddy291/sdxl-turbo:53a8078c87ad900402a246bf5e724fa7538cf15c76b0a22753594af58850a0e3",
     #"lucataco/sdxl-lcm:fbbd475b1084de80c47c35bfe4ae64b964294aa7e237e6537eed938cfd24903d",
     "lucataco/thinkdiffusionxl:c41c12756b561bc81047a9307c9143589d158ef084655dbb3073b4f08ff54f32",
     #"jbilcke/sdxl-cinematic-2:47437c1ade41930aa63e002adbcb946a1dc8649d741de113f02a48639228c8e4",
