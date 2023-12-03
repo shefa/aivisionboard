@@ -55,7 +55,6 @@ def main(page: ft.Page):
                 "image": image_url,
                 "prompt": prompt,
                 "height":int(height), "width":int(width),
-                "sizing_strategy": "input_image",
                 "prompt_strength": 0.3,
                 "num_inference_steps": 3,
                 "disable_safety_checker": True,
