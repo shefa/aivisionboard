@@ -16,7 +16,7 @@ additional_prompts = [
 
 inference_steps = [
     60,
-    1,
+    4,
     60,
 ]
 
