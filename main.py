@@ -5,25 +5,27 @@ from time import sleep
 
 NEGATIVE_PROMPT1="BadDream, badhandv4, BadNegAnatomyV1-neg, easynegative, FastNegativeV2, bad anatomy, extra people, (deformed iris, deformed pupils, mutated hands and fingers:1.4), (deformed, distorted, disfigured:1.3), poorly drawn, bad anatomy, wrong anatomy, extra limb, missing limb, floating limbs, disconnected limbs, mutation, mutated, ugly, disgusting, amputation, signature, watermark, airbrush, photoshop, plastic doll, (ugly eyes, deformed iris, deformed pupils, fused lips and teeth:1.2), text, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, long neck, masculine, obese, fat, out of frame, caricature, body horror, mutant, facebook, youtube, food, lowres, text, error, cropped, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated, out of frame, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, long neck, username, watermark, signature"
 NEGATIVE_PROMPT2="worst quality, low quality, low resolution, lowres, text, error, cropped, out of frame, logo in frame, illustration, ugly, duplicate, morbid, mutilated, anime, cartoon, jpeg artifacts, frame, doubled image, sketch, kitsch, oversaturated, low-res, out of focus, disgusting, poorly drawn, childish, mangled, old, surreal, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, blurry, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, long neck, long body, deformed hands, deformed feet, deformed face, deformed body parts, scared facial expression, drawing, painting, photo effects, angry facial expression, ugly face, bruises, unattractive face, Violence, Gore, Blood, War, Weapons, Death, Destruction, Fire, Pollution, Garbage, Vandalism, Rust, Decay, Filth, Disease, Insects, Rodents, Darkness, Shadows, Nightmares, Fear, Horror, Sadness, Depression, Pain, Suffering, Anguish, Despair, Loneliness, Isolation, Neglect, Abandonment, Negativity, Hate, Racism, Sexism, Homophobia, Discrimination, Intolerance, Prejudice, Ignorance, Arrogance, Greed, Selfishness, Cruelty, Insanity, Madness"
+NEGATIVE_PROMPT3="text, watermark, low-quality, signature, moiré pattern, downsampling, aliasing, distorted, blurry, glossy, blur, jpeg artifacts, compression artifacts, poorly drawn, low-resolution, bad, distortion, twisted, excessive, exaggerated pose, exaggerated limbs, grainy, symmetrical, duplicate, error, pattern, beginner, pixelated, fake, hyper, glitch, overexposed, high-contrast, bad-contrast"
 
 additional_prompts = [
     ", ultra realistic, detailed, cinematic, dreamy, sharp, vibrant",
     ", ultra realistic, detailed, cinematic, dreamy, sharp, vibrant",
-    ", in the style of TOK, ultra realistic in detail, vibrant, cinematic, dreamy, crisp, sharp",
+    ", ultra realistic, detailed, cinematic, dreamy, sharp, vibrant",
     
 ]
 
 inference_steps = [
     60,
-    6,
+    3,
     60,
 ]
 
 models = [
     "lucataco/ssd-1b:1ee85ef681d5ad3d6870b9da1a4543cb3ad702d036fa5b5210f133b83b05a780",
-    "fofr/sdxl-turbo:6244ebc4d96ffcc48fa1270d22a1f014addf79c41732fe205fb1ff638c409267",
+    "dhanushreddy291/sdxl-turbo:53a8078c87ad900402a246bf5e724fa7538cf15c76b0a22753594af58850a0e3",
     #"lucataco/sdxl-lcm:fbbd475b1084de80c47c35bfe4ae64b964294aa7e237e6537eed938cfd24903d",
-    "jbilcke/sdxl-cinematic-2:47437c1ade41930aa63e002adbcb946a1dc8649d741de113f02a48639228c8e4",
+    "lucataco/thinkdiffusionxl:c41c12756b561bc81047a9307c9143589d158ef084655dbb3073b4f08ff54f32",
+    #"jbilcke/sdxl-cinematic-2:47437c1ade41930aa63e002adbcb946a1dc8649d741de113f02a48639228c8e4",
     #"anotherjesse/streaming-sdxl:153204130f521e631a916ef067a0c5e09dcb8782bcfd90926b8e73763b161959",
     #"jbilcke/sdxl-majestic:99a36a3726ce3ede05b8514fc1aaa73be494804f5ea29596c5a37229dfd3c2f6",
     #"luosiallen/latent-consistency-model:553803fd018b3cf875a8bc774c99da9b33f36647badfd88a6eec90d61c5f62fc",
@@ -52,7 +54,7 @@ def main(page: ft.Page):
             models[selected_model],
             input={
                 "prompt": dream_prompt.value+additional_prompts[selected_model],
-                "negative_prompt": NEGATIVE_PROMPT2,
+                "negative_prompt": NEGATIVE_PROMPT3,
                 "height":int(height), "width":int(width),
                 "num_inference_steps": inference_steps[selected_model],
                 "agree_to_research_only": True,
