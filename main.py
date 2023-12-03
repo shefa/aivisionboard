@@ -16,7 +16,7 @@ additional_prompts = [
 
 inference_steps = [
     60,
-    3,
+    1,
     60,
 ]
 
@@ -56,8 +56,8 @@ def main(page: ft.Page):
                 "image": image_url,
                 "prompt": prompt,
                 "height":int(height), "width":int(width),
-                "prompt_strength": 0.3,
-                "num_inference_steps": 3,
+                "prompt_strength": 0.1,
+                "num_inference_steps": 1,
                 "disable_safety_checker": True,
             }
         )
