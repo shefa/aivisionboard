@@ -59,6 +59,7 @@ def main(page: ft.Page):
                 "prompt_strength": 0.1,
                 "num_inference_steps": 1,
                 "disable_safety_checker": True,
+                "nsfw_checker": False,
             }
         )
 
